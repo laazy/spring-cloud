@@ -8,8 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LoggerFilter extends ZuulFilter {
+    private final Tracer tracer;
+
     @Autowired
-    Tracer tracer;
+    public LoggerFilter(Tracer tracer) {
+        this.tracer = tracer;
+    }
 
     @Override
     public String filterType() {

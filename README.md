@@ -13,7 +13,7 @@
     eureka-server, config-client, config-client
 
  ## The admin part
- this part contains thes projects:
+ this part contains these projects:
 
     eureka-server, eureka-client-one, eureka-client-two, admin-server,
     turbine-service

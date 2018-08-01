@@ -1,4 +1,6 @@
-# There are several projects below this repo
+# spring cloud practice project
+This repo contains several projects, which are different component
+of spring cloud of micro-service framework.
 
 ## The eureka part
  this part contains these projects:
@@ -7,12 +9,12 @@
     eureka-ribbon-client, eureka-monitor-client,
     eureka-zuul-client
     
- ## The config part
+## The config part
  this part contains these projects:
 
     eureka-server, config-client, config-client
 
- ## The admin part
+## The admin part
  this part contains these projects:
 
     eureka-server, eureka-client-one, eureka-client-two, admin-server,

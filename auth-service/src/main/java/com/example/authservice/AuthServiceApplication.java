@@ -19,6 +19,8 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @EnableResourceServer
@@ -28,7 +30,20 @@ public class AuthServiceApplication {
     @Qualifier("dataSource")
     private DataSource dataSource;
 
+//    @Autowired
+//    private static UserDao userDao;
+//
     public static void main(String[] args) {
+//        User user = new User();
+//        user.setUsername("laazy");
+//        user.setPassword("123456");
+//        Role role = new Role();
+////        role.setId((long) 1);
+//        role.setName("NORMAL");
+//        List<Role> roleList = new ArrayList<>();
+//        roleList.add(role);
+//        user.setAuthorities(roleList);
+//        userDao.save(user);
         SpringApplication.run(AuthServiceApplication.class, args);
     }
 
@@ -38,7 +53,7 @@ public class AuthServiceApplication {
         JdbcTokenStore tokenStore = new JdbcTokenStore(dataSource);
 
         @Autowired
-//        @Qualifier("authenticationManagerBean")
+        @Qualifier("authenticationManagerBean")
         private AuthenticationManager authenticationManager;
 
         @Autowired

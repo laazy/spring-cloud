@@ -8,6 +8,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerEndpointsConfiguration;
@@ -30,13 +31,13 @@ public class AuthServiceApplication {
     @Qualifier("dataSource")
     private DataSource dataSource;
 
-//    @Autowired
-//    private static UserDao userDao;
+    @Autowired
+    private static UserDao userDao;
 //
     public static void main(String[] args) {
 //        User user = new User();
 //        user.setUsername("laazy");
-//        user.setPassword("123456");
+//        user.setPassword( new BCryptPasswordEncoder().encode( "123456"));
 //        Role role = new Role();
 ////        role.setId((long) 1);
 //        role.setName("NORMAL");
@@ -44,6 +45,7 @@ public class AuthServiceApplication {
 //        roleList.add(role);
 //        user.setAuthorities(roleList);
 //        userDao.save(user);
+        System.out.println( new BCryptPasswordEncoder().encode( "123456"));
         SpringApplication.run(AuthServiceApplication.class, args);
     }
 
@@ -66,7 +68,7 @@ public class AuthServiceApplication {
                     .authorizedGrantTypes("refresh_token", "password")
                     .scopes("ui")
                     .and()
-                    .withClient("service-ui")
+                    .withClient("service-hi")
                     .secret("123456")
                     .authorizedGrantTypes("client_credentials", "refresh_token", "password")
                     .scopes("server");

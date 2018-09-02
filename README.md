@@ -19,3 +19,8 @@ of spring cloud of micro-service framework.
 
     eureka-server, eureka-client-one, eureka-client-two, admin-server,
     turbine-service
+
+## The auth part
+ this part contains these projects:
+
+    eureka-server, auth-service, service-hi

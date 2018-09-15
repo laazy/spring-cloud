@@ -1,5 +1,6 @@
 package com.example.authservice;
 
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +18,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
@@ -63,6 +65,9 @@ public class AuthServiceApplication {
         @Autowired
         private UserServiceDetail userServiceDetail;
 
+        @Autowired
+        private MyUserAuthenticationConverter myUserAuthenticationConverter;
+
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception{
             clients.inMemory()
@@ -78,10 +83,14 @@ public class AuthServiceApplication {
 
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception{
+            DefaultAccessTokenConverter defaultAccessTokenConverter = new DefaultAccessTokenConverter();
+            defaultAccessTokenConverter.setUserTokenConverter(myUserAuthenticationConverter);
             endpoints
                     .tokenStore(tokenStore)
                     .authenticationManager(authenticationManager)
-                    .userDetailsService(userServiceDetail);
+                    .userDetailsService(userServiceDetail)
+//                    .allowedTokenEndpointRequestMethods()
+                    .accessTokenConverter(defaultAccessTokenConverter);
         }
 
         @Override
